@@ -145,28 +145,31 @@ function  user_online_update(){
 }
 add_action( 'wp', 'user_online_update' );
 
-function display_logged_in_users(){
+function display_logged_in_users() {
 	// get the user activity the list
 	$logged_in_users = get_transient('online_status');
 
 	if ( !empty( $logged_in_users ) ) {
 		$i = 0;
-			//echo "<br/><strong>Logged in users are as following :</strong>";
-			foreach ( $logged_in_users as $key => $value) {
-					$user = get_user_by( 'id', $key );
-					//echo '<br/> Looged in user name is ' . $user->display_name;
-					$i++;
-			}
-			$usertext = "There is currently $i user online.";
-			if ($i > 1) { $usertext = "There are currently $i users online."; }
-			return $usertext;
-	} else{
+		//echo "<br/><strong>Logged in users are as following :</strong>";
+		foreach ( $logged_in_users as $key => $value) {
+		    $user = get_user_by( 'id', $key );
+		      //echo '<br/> Looged in user name is ' . $user->display_name;
+				$i++;
+		}
+		$usertext = "There is currently $i user online.";
+		if ($i > 1) {
+      $usertext = "There are currently $i users online.";
+    }
+    return $usertext;
+  }
+  else {
 		//echo "<br/><strong>No user is logged in.</strong>";
 		return "There are no users online.";
-	}
-
+  }
 }
-
 add_shortcode( "my_theme_online_users", "display_logged_in_users" );
+
+
 
 ?>
